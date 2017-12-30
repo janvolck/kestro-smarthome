@@ -1,0 +1,13 @@
+bundle {
+    instructions << [
+            'Bundle-Description': 'Kestro Smarthome API.'
+    ]
+}
+
+dependencies {
+
+	compile 'org.osgi:org.osgi.service.http.whiteboard:1.+'
+	compile 'javax.servlet:javax.servlet-api:4.+'
+	compile 'javax.ws.rs:javax.ws.rs-api:2.+'	
+	
+}

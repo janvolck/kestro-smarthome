@@ -1,0 +1,3 @@
+rootProject.name = 'smarthome'
+include 'smarthome-core'
+
