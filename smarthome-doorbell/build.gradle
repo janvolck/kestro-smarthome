@@ -1,0 +1,11 @@
+bundle {
+    instructions << [
+            'Bundle-Description': 'Kestro Smarthome Doorbell.'
+    ]
+}
+
+dependencies {
+    
+	compile project(':smarthome-core')
+}
+

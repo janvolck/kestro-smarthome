@@ -1,3 +1,5 @@
 rootProject.name = 'smarthome'
 include 'smarthome-core'
-
+include 'smarthome-doorbell'
+include 'smarthome-powersupply'
+include 'smarthome-karaf-feature'

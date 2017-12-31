@@ -1,0 +1,10 @@
+bundle {
+    instructions << [
+            'Bundle-Description': 'Kestro Smarthome PowerSupply.'
+    ]
+}
+
+dependencies {
+    
+	compile project(':smarthome-core')
+}

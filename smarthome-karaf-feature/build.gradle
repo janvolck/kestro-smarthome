@@ -1,0 +1,93 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.lburgazzoli:gradle-karaf-plugin:0.0.48"
+    }
+}
+
+repositories {
+    maven {
+        name 'Sonatype OSS Maven Repositor'
+        url 'https://oss.sonatype.org/content/groups/public'
+    }
+}
+
+apply plugin: 'com.github.lburgazzoli.karaf'
+configurations {
+    core {
+        transitive = false
+    }
+
+    devices {
+        transitive = false
+    }
+}
+
+dependencies {
+    core project(':smarthome-core')
+
+    devices project(':smarthome-doorbell')
+    devices project(':smarthome-powersupply')
+}
+
+karaf {
+    features {
+        xsdVersion  = '1.2.0'
+        description = 'Karaf Archive for Kestro Smarthome.'
+        name = 'Kestro Smarthome'
+
+        includeProject = false
+
+        repository "mvn:org.apache.karaf.features/standard/4.1.1/xml/features"
+        repository "mvn:org.code-house.jackson/features/2.8.7/xml/features"
+        repository "mvn:com.eclipsesource.jaxrs/features/5.3.1/xml/features"
+
+        feature {
+            name        = 'smarthome-core'
+            description = 'Kestro Smarthome core.'
+
+			feature 'kestro-io'
+
+            configurations 'core'
+        }
+
+        feature {
+            name        = 'smarthome-devices'
+            description = 'Kestro Smarthome devices.'
+
+            feature 'scr'
+            feature 'pax-http-jetty'
+            feature 'jackson-core'
+            feature 'jackson-databind'
+            feature 'jax-rs-connector'
+            feature 'jax-rs-provider-moxy'
+            feature 'jax-rs-provider-gson'
+
+            feature 'smarthome-core'
+
+            configurations 'devices'
+        }
+    }
+
+    kar {
+        archiveName = 'kestro-smarthome'
+    }
+}
+
+deployBundleToKaraf {
+    enabled false
+}
+
+task deployFeatureToKaraf(type: Copy) {
+    dependsOn 'generateKar'
+
+    from karaf.kar.outputPath
+    into "$System.env.HOME" + "/bin/apache-karaf-4.1.1/deploy/"
+
+    inputs.file karaf.kar.outputPath
+    outputs.file "$System.env.HOME" + "/bin/apache-karaf-4.1.1/deploy/" + jar.archiveName
+}
