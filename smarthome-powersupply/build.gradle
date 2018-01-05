@@ -6,5 +6,6 @@ bundle {
 
 dependencies {
     
+    compile 'be.kestro.io:io-core:1.+'   
 	compile project(':smarthome-core')
 }

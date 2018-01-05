@@ -6,6 +6,9 @@ bundle {
 
 dependencies {
     
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    
+    compile 'be.kestro.io:io-core:1.+'
 	compile project(':smarthome-core')
 }
 

@@ -38,7 +38,7 @@ karaf {
     features {
         xsdVersion  = '1.2.0'
         description = 'Karaf Archive for Kestro Smarthome.'
-        name = 'Kestro Smarthome'
+        name = 'kestro-smarthome'
 
         includeProject = false
 
@@ -50,7 +50,7 @@ karaf {
             name        = 'smarthome-core'
             description = 'Kestro Smarthome core.'
 
-			feature 'kestro-io'
+			feature 'io-core'
 
             configurations 'core'
         }
